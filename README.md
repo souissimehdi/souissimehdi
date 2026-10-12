@@ -1,6 +1,6 @@
 <!-- ============================  HEADER  ============================ -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&height=220&color=0:6DB33F,50:1B5E20,100:0D1117&text=Mohamed%20Mehdi%20Souissi&fontColor=ffffff&fontSize=46&fontAlignY=36&desc=Java%20%26%20Spring%20Backend%20Expert%20%E2%80%A2%2014%2B%20years%20%E2%80%A2%20Generative%20AI%20explorer&descAlignY=58&descSize=17&animation=fadeIn" alt="header"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&height=220&color=0:6DB33F,50:1B5E20,100:0D1117&text=Mohamed%20Mehdi%20Souissi&fontColor=ffffff&fontSize=46&fontAlignY=36&desc=Java%20%2F%20Spring%20Backend%20Expert%20%E2%80%A2%2014%2B%20years%20%E2%80%A2%20Generative%20AI%20explorer&descAlignY=58&descSize=17&animation=fadeIn" alt="header"/>
 </p>
 
 <p align="center">
@@ -188,10 +188,6 @@ commit by commit from a hello-world endpoint into a full RAG stack:
 
 <p align="center">
   <code>while (curious) { learn(); build(); share(); git push; }</code>
-</p>
-
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=souissimehdi&style=flat-square&color=6DB33F&label=profile+views" alt="profile views"/>
 </p>
 
 <p align="center">
