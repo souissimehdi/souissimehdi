@@ -48,14 +48,16 @@ public class MohamedMehdiSouissi implements BackendEngineer, Architect, Lifelong
 ## 🧠 How my GitHub works (a RAG pipeline, obviously)
 
 ```mermaid
-flowchart LR
-    Q([💡 New idea]) --> T[🌍 Translate to<br/>Java & Spring]
-    T --> R[(🗄️ Vector store of<br/>14+ years of backend)]
-    R -->|top-k patterns:<br/>microservices · Kafka · AWS| P[🛡️ Filter out<br/>over-engineering]
-    P --> A[🧩 Augment with<br/>Spring AI docs]
-    A --> G[🤖 Generate code<br/>with Claude]
-    G --> C([✅ git push])
-    C -. chat memory advisor .-> R
+flowchart TB
+    subgraph S1 ["🔎 Retrieve"]
+        direction LR
+        Q([💡 New idea]) --> T[🌍 Translate to<br/>Java & Spring] --> R[(🗄️ Vector store of<br/>14+ years of backend)] -->|top-k patterns:<br/>microservices · Kafka · AWS| P[🛡️ Filter out<br/>over-engineering]
+    end
+    subgraph S2 ["✨ Generate"]
+        direction LR
+        A[🧩 Augment with<br/>Spring AI docs] --> G[🤖 Generate code<br/>with Claude] --> C([✅ git push]) -. chat memory advisor .-> M[(🧠 New experience<br/>back into the store)]
+    end
+    S1 --> S2
 ```
 
 ---
