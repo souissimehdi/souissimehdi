@@ -8,8 +8,8 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/📍_Tunis,_Tunisia-0D1117?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/Oracle_Certified-Java_SE_11_Developer-F80000?style=for-the-badge&logo=oracle&logoColor=white"/>
+  <a href="https://www.linkedin.com/in/souissimedmehdi/"><img src="https://img.shields.io/badge/LinkedIn-souissimedmehdi-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/></a>
   <a href="mailto:souissimedmehdi@yahoo.fr"><img src="https://img.shields.io/badge/Contact_me-6001D2?style=for-the-badge&logo=yahoo&logoColor=white"/></a>
 </p>
 
