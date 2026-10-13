@@ -51,11 +51,13 @@ public class MohamedMehdiSouissi implements BackendEngineer, Architect, Lifelong
 flowchart TB
     subgraph S1 ["🔎 Retrieve"]
         direction LR
-        Q([💡 New idea]) --> T[🌍 Translate to<br/>Java & Spring] --> R[(🗄️ Vector store of<br/>14+ years of backend)] -->|top-k patterns:<br/>microservices · Kafka · AWS| P[🛡️ Filter out<br/>over-engineering]
+        Q([💡 New idea]) --> K{⚡ Semantic cache:<br/>solved something<br/>similar before?}
+        K -->|hit| H([♻️ Reuse it,<br/>zero tokens])
+        K -->|miss| T[🌍 Translate to<br/>Java & Spring] --> R[(🗄️ Vector store of<br/>14+ years of backend)] -->|top-k patterns:<br/>microservices · Kafka · AWS| P[🛡️ Filter out<br/>over-engineering]
     end
     subgraph S2 ["✨ Generate"]
         direction LR
-        A[🧩 Augment with<br/>Spring AI docs] --> G[🤖 Generate code<br/>with Claude] --> C([✅ git push]) -. chat memory advisor .-> M[(🧠 New experience<br/>back into the store)]
+        A[🧩 Augment with<br/>Spring AI docs] --> G[🤖 Generate code<br/>with Claude] --> C([✅ git push]) -. chat memory +<br/>semantic cache .-> M[(🧠 New experience<br/>back into the store)]
     end
     S1 --> S2
 ```
@@ -109,7 +111,7 @@ ceremonies, estimation and Git flow strategy.
 ### 🌱 [spring-ia](https://github.com/souissimehdi/spring-ia)
 
 **Spring Boot 4 + Spring AI 2** talking to **Anthropic Claude on AWS Bedrock**, grown
-commit by commit from a hello-world endpoint into a full RAG stack:
+commit by commit from a hello-world endpoint into a full RAG stack with semantic caching:
 
 - 💬 `ChatClient`, prompt templates, advisors, streaming
 - 🧱 Structured output → records, lists, maps
@@ -117,6 +119,7 @@ commit by commit from a hello-world endpoint into a full RAG stack:
 - 📚 RAG: **Tika → chunking → Titan embeddings → Qdrant**
 - 🌐 Web-search RAG with **Tavily**
 - 🛡️ Query translation and **PII masking**
+- ⚡ **Semantic caching**: similar questions are answered from the cache, with no LLM call (Redis, then Qdrant)
 
 </td>
 <td width="40%" valign="top">
@@ -125,6 +128,10 @@ commit by commit from a hello-world endpoint into a full RAG stack:
    question
       │
       ▼
+ ┌───────────┐  hit
+ │  cache?   │─────▶ cached answer
+ └─────┬─────┘ miss
+       ▼
  ┌───────────┐
  │ translate │ pre-retrieval
  └─────┬─────┘
@@ -150,6 +157,7 @@ commit by commit from a hello-world endpoint into a full RAG stack:
 + ✅ ChatClient · prompts · advisors · structured output
 + ✅ Chat memory (JDBC)
 + ✅ RAG with Qdrant · advanced RAG (pre/post-retrieval, web search)
++ ✅ Semantic caching — Redis, then Qdrant
 ! 🔄 Tool calling — letting LLMs call Java methods
 ! 🔄 Model Context Protocol (MCP) — clients & servers
 - ⏳ AI evaluators · observability (Prometheus, Grafana, OpenTelemetry)
@@ -173,7 +181,7 @@ commit by commit from a hello-world endpoint into a full RAG stack:
 | **Messaging** | Apache Kafka · ActiveMQ · Zookeeper · Mule ESB · Apache Camel |
 | **Data** | PostgreSQL · MongoDB · Redis · Cassandra · Elasticsearch · MySQL · SQL Server |
 | **Cloud** | AWS S3 · Lambda · Step Functions · Bedrock · AWS SDK |
-| **Generative AI** | Spring AI · Claude · RAG · Qdrant · embeddings · MCP |
+| **Generative AI** | Spring AI · Claude · RAG · Qdrant · embeddings · semantic caching · MCP |
 | **Workflow / BPM** | Camunda · BPMN 2.0 · Quartz Scheduler |
 | **Quality & DevOps** | JUnit · Selenium · SonarQube · Jenkins · Docker · Git flow |
 
