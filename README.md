@@ -37,8 +37,9 @@ public class MohamedMehdiSouissi implements BackendEngineer, Architect, Lifelong
 
     @Scheduled(cron = "0 0 20 * * *")   // evenings & weekends
     void learnGenerativeAI() {
-        explore("LLMs", "RAG", "MCP", "AI Agents");
+        explore("LLMs", "RAG", "Tool Calling", "MCP", "AI Agents");
         build("github.com/souissimehdi/spring-ia");
+        build("github.com/souissimehdi/mcp-client");
     }
 }
 ```
@@ -58,6 +59,7 @@ flowchart TB
     subgraph S2 ["✨ Generate"]
         direction LR
         A[🧩 Augment with<br/>Spring AI docs] --> G[🤖 Generate code<br/>with Claude] --> C([✅ git push]) -. chat memory +<br/>semantic cache .-> M[(🧠 New experience<br/>back into the store)]
+        G <-->|"@Tool call"| X[🛠️ Java tools for<br/>real-world facts]
     end
     S1 --> S2
 ```
@@ -111,7 +113,7 @@ ceremonies, estimation and Git flow strategy.
 ### 🌱 [spring-ia](https://github.com/souissimehdi/spring-ia)
 
 **Spring Boot 4 + Spring AI 2** talking to **Anthropic Claude on AWS Bedrock**, grown
-commit by commit from a hello-world endpoint into a full RAG stack with semantic caching:
+commit by commit from a hello-world endpoint into a full RAG stack with semantic caching and tool calling:
 
 - 💬 `ChatClient`, prompt templates, advisors, streaming
 - 🧱 Structured output → records, lists, maps
@@ -120,6 +122,8 @@ commit by commit from a hello-world endpoint into a full RAG stack with semantic
 - 🌐 Web-search RAG with **Tavily**
 - 🛡️ Query translation and **PII masking**
 - ⚡ **Semantic caching**: similar questions are answered from the cache, with no LLM call (Redis, then Qdrant)
+- 🛠️ **Tool calling**: `@Tool` Java methods the model calls on its own, e.g. the real time in any time zone
+- 🎫 **Helpdesk assistant**: creates and checks tickets through tools backed by Spring Data JPA, avoiding duplicates
 
 </td>
 <td width="40%" valign="top">
@@ -153,13 +157,21 @@ commit by commit from a hello-world endpoint into a full RAG stack with semantic
 </tr>
 </table>
 
+### 🔌 [mcp-client](https://github.com/souissimehdi/mcp-client)
+
+A Spring AI **MCP client** on Claude (Bedrock Converse). The model calls tools exposed
+by several MCP servers over stdio: the official **filesystem** server, **GitHub** (Docker)
+and my own Spring AI MCP server. Machine-specific paths and tokens stay out of git.
+
 ```diff
 + ✅ ChatClient · prompts · advisors · structured output
 + ✅ Chat memory (JDBC)
 + ✅ RAG with Qdrant · advanced RAG (pre/post-retrieval, web search)
 + ✅ Semantic caching — Redis, then Qdrant
-! 🔄 Tool calling — letting LLMs call Java methods
-! 🔄 Model Context Protocol (MCP) — clients & servers
++ ✅ Tool calling — @Tool methods the model calls, with and without parameters
++ ✅ Tool calling with a database — helpdesk tickets (JPA)
++ ✅ Model Context Protocol (MCP) — client with filesystem, GitHub and custom servers
+! 🔄 MCP, next — remote (HTTP) transport, tool allowlist, security
 - ⏳ AI evaluators · observability (Prometheus, Grafana, OpenTelemetry)
 - ⏳ A real-world AI agent
 ```
@@ -181,7 +193,7 @@ commit by commit from a hello-world endpoint into a full RAG stack with semantic
 | **Messaging** | Apache Kafka · ActiveMQ · Zookeeper · Mule ESB · Apache Camel |
 | **Data** | PostgreSQL · MongoDB · Redis · Cassandra · Elasticsearch · MySQL · SQL Server |
 | **Cloud** | AWS S3 · Lambda · Step Functions · Bedrock · AWS SDK |
-| **Generative AI** | Spring AI · Claude · RAG · Qdrant · embeddings · semantic caching · MCP |
+| **Generative AI** | Spring AI · Claude · RAG · Qdrant · embeddings · semantic caching · tool calling · MCP |
 | **Workflow / BPM** | Camunda · BPMN 2.0 · Quartz Scheduler |
 | **Quality & DevOps** | JUnit · Selenium · SonarQube · Jenkins · Docker · Git flow |
 
