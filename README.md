@@ -202,15 +202,20 @@ and my own Spring AI MCP server. Machine-specific paths and tokens stay out of g
 ## 📊 GitHub stats
 
 <p align="center">
-  <img height="165" src="https://github-readme-stats.vercel.app/api?username=souissimehdi&show_icons=true&theme=github_dark&hide_border=true&title_color=6DB33F&icon_color=6DB33F&include_all_commits=true" alt="stats"/>
-  <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=souissimehdi&layout=compact&theme=github_dark&hide_border=true&title_color=6DB33F" alt="top languages"/>
+  <img height="165" src="stats.svg" alt="stats"/>
+  <img height="165" src="top-langs.svg" alt="top languages"/>
 </p>
 
 ---
 
-<p align="center">
-  <code>while (curious) { learn(); build(); share(); git push; }</code>
-</p>
+```java
+while (curious) {
+    learn();
+    build();
+    share();
+    git.push();
+}
+```
 
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&height=110&color=0:0D1117,50:1B5E20,100:6DB33F&section=footer" alt="footer"/>
